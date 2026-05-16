@@ -13,4 +13,6 @@ public interface PageRepository extends MongoRepository<Page, ObjectId> {
     List<Page> findByOwnerId(String ownerId);
     List<Page> findByOwnerIdAndParentId(String ownerId, ObjectId parentId);
     Optional<Page> findByOwnerIdAndId(String ownerId, ObjectId id);
+    List<Page> findByOwnerIdAndTitleContainingIgnoreCase(String ownerId, String title);
+    List<Page> findByOwnerIdAndTagsContaining(String ownerId, String tag);
 }
