@@ -3,7 +3,6 @@ package lab.localcloudnative.lcnpages.service;
 import lab.localcloudnative.lcnpages.domain.Page;
 import lab.localcloudnative.lcnpages.dto.PageRequest;
 import lab.localcloudnative.lcnpages.repository.PageRepository;
-import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,7 +32,7 @@ public class PageService {
         return pageRepository.findByOwnerIdAndTagsContaining(ownerId, tag);
     }
 
-    public Page getPage(String ownerId, ObjectId id) {
+    public Page getPage(String ownerId, String id) {
         return pageRepository.findByOwnerIdAndId(ownerId, id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Page not found"));
     }
@@ -49,7 +48,7 @@ public class PageService {
         return pageRepository.save(page);
     }
 
-    public Page updatePage(String ownerId, ObjectId id, PageRequest request) {
+    public Page updatePage(String ownerId, String id, PageRequest request) {
         Page page = getPage(ownerId, id);
         page.setTitle(request.title());
         page.setSlug(toSlug(request.title()));
@@ -59,7 +58,7 @@ public class PageService {
         return pageRepository.save(page);
     }
 
-    public void deletePage(String ownerId, ObjectId id) {
+    public void deletePage(String ownerId, String id) {
         Page page = getPage(ownerId, id);
         pageRepository.delete(page);
     }

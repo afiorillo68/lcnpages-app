@@ -3,7 +3,6 @@ package lab.localcloudnative.lcnpages.controller;
 import lab.localcloudnative.lcnpages.domain.Page;
 import lab.localcloudnative.lcnpages.dto.PageRequest;
 import lab.localcloudnative.lcnpages.service.PageService;
-import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -48,7 +47,7 @@ public class PageController {
     @GetMapping("/{id}")
     public Page getPage(
             @AuthenticationPrincipal Jwt jwt,
-            @PathVariable ObjectId id) {
+            @PathVariable String id) {
         return pageService.getPage(jwt.getSubject(), id);
     }
 
@@ -63,7 +62,7 @@ public class PageController {
     @PutMapping("/{id}")
     public Page updatePage(
             @AuthenticationPrincipal Jwt jwt,
-            @PathVariable ObjectId id,
+            @PathVariable String id,
             @RequestBody PageRequest request) {
         return pageService.updatePage(jwt.getSubject(), id, request);
     }
@@ -72,7 +71,7 @@ public class PageController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePage(
             @AuthenticationPrincipal Jwt jwt,
-            @PathVariable ObjectId id) {
+            @PathVariable String id) {
         pageService.deletePage(jwt.getSubject(), id);
     }
 }
