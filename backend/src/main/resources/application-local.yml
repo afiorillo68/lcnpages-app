@@ -1,0 +1,9 @@
+spring:
+  mongodb:
+    uri: mongodb://lcnapp:${LCNAPP_PASSWORD}@localhost:27017/lcnpages?authSource=lcnpages
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak.lcn-lab.local/realms/lcn
+          audiences: lcnpages-frontend

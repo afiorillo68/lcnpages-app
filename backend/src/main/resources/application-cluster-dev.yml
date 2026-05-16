@@ -1,0 +1,12 @@
+# Placeholder per Step 1D — configurazione cluster-dev
+# Sara' finalizzata quando si deployera' lcnpages nel cluster
+spring:
+  data:
+    mongodb:
+      uri: mongodb://lcnapp:lcnapp@mongodb.platform-mongodb.svc.cluster.local:27017/lcnpages?authSource=lcnpages
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak.platform-keycloak.svc.cluster.local:8443/realms/lcn
+          audiences: lcnpages-frontend
